@@ -1,0 +1,80 @@
+Google Cloud SDK 369.0.0
+bq 2.0.72
+core 2022.01.14
+gsutil 5.6
+
+# output terraform apply
+
+Note: Objects have changed outside of Terraform
+
+Terraform detected the following changes made outside of Terraform since the last "terraform apply":
+
+  # google_bigquery_dataset.dataset has changed
+  ~ resource "google_bigquery_dataset" "dataset" {
+        id                              = "projects/dtc-de-course-339020/datasets/trips_data_all"
+      + labels                          = {}
+        # (10 unchanged attributes hidden)
+
+        # (4 unchanged blocks hidden)
+    }
+
+  # google_storage_bucket.data-lake-bucket has changed
+  ~ resource "google_storage_bucket" "data-lake-bucket" {
+        id                          = "dtc_data_lake_dtc-de-course-339020"
+      + labels                      = {}
+        name                        = "dtc_data_lake_dtc-de-course-339020"
+        # (9 unchanged attributes hidden)
+
+
+        # (2 unchanged blocks hidden)
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+No changes. Your infrastructure matches the configuration.
+
+Your configuration already matches the changes detected above. If you'd like to update the Terraform state to match, create and apply a refresh-only plan:
+  terraform apply -refresh-only
+
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+
+
+
+question 3
+
+select count(1)
+from yellow_taxi_trips
+where date(tpep_pickup_datetime)='2021-01-15'
+
+question 4
+
+select date(tpep_pickup_datetime)
+from yellow_taxi_trips
+where EXTRACT(MONTH FROM tpep_pickup_datetime) = '1'
+order by tip_amount desc 
+limit 1
+
+question 5
+
+select count(index) as count_trip, "DOLocationID" as loc
+from yellow_taxi_trips
+where date(tpep_pickup_datetime) = '2021-01-14'
+and "PULocationID"=43
+group by "DOLocationID"
+order by count_trip desc
+
+question 6
+
+select "PULocationID", "DOLocationID", AVG(total_amount) as avg_price
+from yellow_taxi_trips
+group by "PULocationID", "DOLocationID" 
+order by avg_price desc
+limit 1
+
+question 7
+
+
