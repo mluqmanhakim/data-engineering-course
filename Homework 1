@@ -75,6 +75,4 @@ group by "PULocationID", "DOLocationID"
 order by avg_price desc
 limit 1
 
-question 7
-
 
