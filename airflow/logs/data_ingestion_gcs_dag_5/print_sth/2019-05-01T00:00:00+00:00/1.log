@@ -1,0 +1,27 @@
+[2022-02-03 20:53:48,689] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: data_ingestion_gcs_dag_5.print_sth scheduled__2019-05-01T00:00:00+00:00 [queued]>
+[2022-02-03 20:53:48,858] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: data_ingestion_gcs_dag_5.print_sth scheduled__2019-05-01T00:00:00+00:00 [queued]>
+[2022-02-03 20:53:48,863] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2022-02-03 20:53:48,865] {taskinstance.py:1239} INFO - Starting attempt 1 of 1
+[2022-02-03 20:53:48,867] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2022-02-03 20:53:49,101] {taskinstance.py:1259} INFO - Executing <Task(BashOperator): print_sth> on 2019-05-01 00:00:00+00:00
+[2022-02-03 20:53:49,159] {standard_task_runner.py:52} INFO - Started process 6927 to run task
+[2022-02-03 20:53:49,211] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'data_ingestion_gcs_dag_5', 'print_sth', 'scheduled__2019-05-01T00:00:00+00:00', '--job-id', '49', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_gcs_dag_2.py', '--cfg-path', '/tmp/tmpdq_9n65n', '--error-file', '/tmp/tmp3cjmztxb']
+[2022-02-03 20:53:49,221] {standard_task_runner.py:77} INFO - Job 49: Subtask print_sth
+[2022-02-03 20:53:50,028] {logging_mixin.py:109} INFO - Running <TaskInstance: data_ingestion_gcs_dag_5.print_sth scheduled__2019-05-01T00:00:00+00:00 [running]> on host 985445ce9491
+[2022-02-03 20:53:51,178] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=data_ingestion_gcs_dag_5
+AIRFLOW_CTX_TASK_ID=print_sth
+AIRFLOW_CTX_EXECUTION_DATE=2019-05-01T00:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-05-01T00:00:00+00:00
+[2022-02-03 20:53:51,206] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2022-02-03 20:53:51,225] {subprocess.py:74} INFO - Running command: ['bash', '-c', "echo 'helloworld'"]
+[2022-02-03 20:53:51,332] {subprocess.py:85} INFO - Output:
+[2022-02-03 20:53:51,499] {subprocess.py:89} INFO - helloworld
+[2022-02-03 20:53:51,535] {subprocess.py:93} INFO - Command exited with return code 0
+[2022-02-03 20:53:52,691] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=data_ingestion_gcs_dag_5, task_id=print_sth, execution_date=20190501T000000, start_date=20220203T205348, end_date=20220203T205352
+[2022-02-03 20:53:53,057] {local_task_job.py:154} INFO - Task exited with return code 0
+[2022-02-03 20:53:53,390] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check

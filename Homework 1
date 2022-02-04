@@ -46,7 +46,7 @@ Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 
 question 3
 
-select count(1)
+select count(*)
 from yellow_taxi_trips
 where date(tpep_pickup_datetime)='2021-01-15'
 
