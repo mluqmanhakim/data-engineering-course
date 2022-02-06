@@ -16,12 +16,10 @@ import pyarrow.parquet as pq
 PROJECT_ID = os.environ.get("GCP_PROJECT_ID")
 BUCKET = os.environ.get("GCP_GCS_BUCKET")
 
-URL_PREFIX = 'https://s3.amazonaws.com/nyc-tlc/trip+data' 
-URL_TEMPLATE = URL_PREFIX + '/yellow_tripdata_{{ execution_date.strftime(\'%Y-%m\') }}.csv'
-TABLE_NAME_TEMPLATE = 'yellow_tripdata_{{ execution_date.strftime(\'%Y_%m\') }}'
+URL_PREFIX = 'https://nyc-tlc.s3.amazonaws.com/trip+data' 
+URL_TEMPLATE = URL_PREFIX + '/fhv_tripdata_{{ execution_date.strftime(\'%Y-%m\') }}.csv'
 
-
-dataset_file = 'yellow_tripdata_{{ execution_date.strftime(\'%Y-%m\') }}.csv'
+dataset_file = 'fhv_tripdata_{{ execution_date.strftime(\'%Y-%m\') }}.csv'
 path_to_local_home = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
 parquet_file = dataset_file.replace('.csv', '.parquet')
 BIGQUERY_DATASET = os.environ.get("BIGQUERY_DATASET", 'trips_data_all')
@@ -58,10 +56,10 @@ def upload_to_gcs(bucket, object_name, local_file):
 
 
 workflow = DAG(
-    dag_id="yellow_taxi_data_ingestion_gcs_dag_v3",
+    dag_id="fhv_trip_data_ingestion_gcs_dag",
     schedule_interval="@monthly",
-    start_date=datetime(2019, 3, 10),
-    end_date=datetime(2020, 1, 1),
+    start_date=datetime(2018, 12, 30),
+    end_date=datetime(2019, 12, 30),
     max_active_runs=1,
     tags=['dtc-de'],
 )

@@ -1,6 +1,5 @@
 import os
 import logging
-
 from datetime import datetime
 
 from airflow import DAG
@@ -16,12 +15,8 @@ import pyarrow.parquet as pq
 PROJECT_ID = os.environ.get("GCP_PROJECT_ID")
 BUCKET = os.environ.get("GCP_GCS_BUCKET")
 
-URL_PREFIX = 'https://s3.amazonaws.com/nyc-tlc/trip+data' 
-URL_TEMPLATE = URL_PREFIX + '/yellow_tripdata_{{ execution_date.strftime(\'%Y-%m\') }}.csv'
-TABLE_NAME_TEMPLATE = 'yellow_tripdata_{{ execution_date.strftime(\'%Y_%m\') }}'
-
-
-dataset_file = 'yellow_tripdata_{{ execution_date.strftime(\'%Y-%m\') }}.csv'
+dataset_file = "taxi+_zone_lookup.csv"
+dataset_url = f"https://s3.amazonaws.com/nyc-tlc/misc/{dataset_file}"
 path_to_local_home = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
 parquet_file = dataset_file.replace('.csv', '.parquet')
 BIGQUERY_DATASET = os.environ.get("BIGQUERY_DATASET", 'trips_data_all')
@@ -57,22 +52,26 @@ def upload_to_gcs(bucket, object_name, local_file):
     blob.upload_from_filename(local_file)
 
 
-workflow = DAG(
-    dag_id="yellow_taxi_data_ingestion_gcs_dag_v3",
-    schedule_interval="@monthly",
-    start_date=datetime(2019, 3, 10),
-    end_date=datetime(2020, 1, 1),
+default_args = {
+    "owner": "airflow",
+    "start_date": datetime(2022, 2, 5),
+    "depends_on_past": False,
+    "retries": 1,
+}
+
+# NOTE: DAG declaration - using a Context Manager (an implicit way)
+with DAG(
+    dag_id="zones_data_ingestion_gcs_dag",
+    schedule_interval="@once",
+    default_args=default_args,
+    catchup=False,
     max_active_runs=1,
     tags=['dtc-de'],
-)
-
-# bash_command=f"curl -sS {URL_TEMPLATE} > {path_to_local_home}/{dataset_file}"
-# NOTE: DAG declaration - using a Context Manager (an implicit way)
-with workflow:
+) as dag:
 
     download_dataset_task = BashOperator(
         task_id="download_dataset_task",
-        bash_command=f"curl -sS {URL_TEMPLATE} > {path_to_local_home}/{dataset_file}"
+        bash_command=f"curl -sS {dataset_url} > {path_to_local_home}/{dataset_file}"
     )
 
     format_to_parquet_task = PythonOperator(
@@ -94,5 +93,4 @@ with workflow:
         },
     )
 
-   
     download_dataset_task >> format_to_parquet_task >> local_to_gcs_task
