@@ -21,3 +21,7 @@ AIRFLOW_CTX_DAG_RUN_ID=scheduled__2019-01-01T00:00:00+00:00
  /tmp
 [2022-02-06 12:23:44,927] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'curl -sS https://nyc-tlc.s3.amazonaws.com/trip+data/fhv_tripdata_2019-01.csv > /opt/***/fhv_tripdata_2019-01.csv']
 [2022-02-06 12:23:44,948] {subprocess.py:85} INFO - Output:
+[2022-02-06 12:34:55,244] {subprocess.py:93} INFO - Command exited with return code 0
+[2022-02-06 12:34:55,390] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=fhv_trip_data_ingestion_gcs_dag, task_id=download_dataset_task, execution_date=20190101T000000, start_date=20220206T122344, end_date=20220206T123455
+[2022-02-06 12:34:55,530] {local_task_job.py:154} INFO - Task exited with return code 0
+[2022-02-06 12:34:55,683] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check
