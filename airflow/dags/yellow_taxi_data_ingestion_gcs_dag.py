@@ -58,10 +58,10 @@ def upload_to_gcs(bucket, object_name, local_file):
 
 
 workflow = DAG(
-    dag_id="yellow_taxi_data_ingestion_gcs_dag",
+    dag_id="yellow_taxi_data_ingestion_gcs_dag_v3",
     schedule_interval="@monthly",
-    start_date=datetime(2019, 3, 10),
-    end_date=datetime(2020, 1, 1),
+    start_date=datetime(2019, 1, 1),
+    end_date=datetime(2020, 12, 30),
     max_active_runs=1,
     tags=['dtc-de'],
 )
