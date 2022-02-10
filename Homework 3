@@ -1,0 +1,11 @@
+SELECT count(1) FROM `dtc-de-course-339020.nytaxi.fhv_trip`;
+
+
+select count(distinct(dispatching_base_num))
+FROM `dtc-de-course-339020.nytaxi.fhv_trip`;
+
+
+SELECT count(1) 
+FROM `dtc-de-course-339020.nytaxi.fhv_trip`
+where date(pickup_datetime) between '2019-01-01' and '2019-03-31'
+and dispatching_base_num in ('B00987', 'B02060', 'B02279');
