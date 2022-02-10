@@ -1,0 +1,24 @@
+CREATE OR REPLACE EXTERNAL TABLE `dtc-de-course-339020.nytaxi.yellow_taxi_trip`
+OPTIONS (
+    format = 'parquet',
+    uris = [
+        'gs://dtc_data_lake_dtc-de-course-339020/raw/yellow_taxi_trip/2019/*',
+        'gs://dtc_data_lake_dtc-de-course-339020/raw/yellow_taxi_trip/2020/*'
+    ]
+)
+
+CREATE OR REPLACE EXTERNAL TABLE `dtc-de-course-339020.nytaxi.fhv_trip`
+OPTIONS (
+    format = 'parquet',
+    uris = [
+        'gs://dtc_data_lake_dtc-de-course-339020/raw/fhv_trip/*'
+    ]
+)
+
+CREATE OR REPLACE EXTERNAL TABLE `dtc-de-course-339020.nytaxi.zone`
+OPTIONS (
+    format = 'parquet',
+    uris = [
+        'gs://dtc_data_lake_dtc-de-course-339020/raw/zone/*'
+    ]
+)
