@@ -1,0 +1,10 @@
+ssh -i ~/.ssh/gcp luqman@34.65.189.241
+
+ssh -L 8888:localhost:8888 -i ~/.ssh/gcp luqman@34.65.189.241
+
+ssh -L 4040:localhost:4040 -i ~/.ssh/gcp luqman@34.65.189.241 
+
+
+export PYTHONPATH="${SPARK_HOME}/python/:$PYTHONPATH"
+export PYTHONPATH="${SPARK_HOME}/python/lib/py4j-0.10.9-src.zip:$PYTHONPATH"
+
